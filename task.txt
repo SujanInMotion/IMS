@@ -1,0 +1,13 @@
+#project - IMS
+
+# db designing and model creation and migration on db(postgresql)
+
+#db design
+
+#ProductType
+#Product
+#Purchase
+#Vendor
+#Sell
+#User(django)
+#Department
