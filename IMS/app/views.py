@@ -31,10 +31,11 @@ class ProductView(GenericViewSet):
 
 
 class PurchaseView(GenericViewSet):
-    questyset = Purchase.objects.all()
-    serizlizer_class = PurchaseSerializer
+    queryset = Purchase.objects.all()
+    serializer_class = PurchaseSerializer
+   
     
-    def list(self,reqeust):
+    def list(self,request):
         purchase_obj = self.get_queryset()
         serializer = self.get_serializer(purchase_obj,many=True)
         return Response(serializer.data)
@@ -45,17 +46,16 @@ class PurchaseView(GenericViewSet):
             serializer.save()
             return Response(serializer.data,status.HTTP_201_CREATED)
         else:
-            return Response(serializer.error,status.HTTP_400_BAD_REQUEST)
+            return Response(serializer.errors,status.HTTP_400_BAD_REQUEST)
 
 
-class VendorView(GenericViewSet):
-    
-    questyset = Vendor.objects.all()
-    serizlizer_class = VendorSerializer
+class VendorView(GenericViewSet):    
+    queryset = Vendor.objects.all()
+    serializer_class = VendorSerializer
     
     def list(self,reqeust):
-        purchase_obj = self.get_queryset()
-        serializer = self.get_serializer(purchase_obj,many=True)
+        vendor_obj = self.get_queryset()
+        serializer = self.get_serializer(vendor_obj,many=True)
         return Response(serializer.data)
     
     def create(self,request):
@@ -64,14 +64,14 @@ class VendorView(GenericViewSet):
             serializer.save()
             return Response(serializer.data,status.HTTP_201_CREATED)
         else:
-            return Response(serializer.error,status.HTTP_400_BAD_REQUEST)
+            return Response(serializer.errors,status.HTTP_400_BAD_REQUEST)
 
 
 class SellView(GenericViewSet):
-    questyset = Sell.objects.all()
-    serizlizer_class = SellSerializer
+    queryset = Sell.objects.all()
+    serializer_class = SellSerializer
     
-    def list(self,reqeust):
+    def list(self,request):
         purchase_obj = self.get_queryset()
         serializer = self.get_serializer(purchase_obj,many=True)
         return Response(serializer.data)
@@ -82,14 +82,14 @@ class SellView(GenericViewSet):
             serializer.save()
             return Response(serializer.data,status.HTTP_201_CREATED)
         else:
-            return Response(serializer.error,status.HTTP_400_BAD_REQUEST)
+            return Response(serializer.errors,status.HTTP_400_BAD_REQUEST)
 
 
 class DepartmentView(GenericViewSet):
-    questyset = Department.objects.all()
-    serizlizer_class = DepartmentSerializer
+    queryset = Department.objects.all()
+    serializer_class = DepartmentSerializer
     
-    def list(self,reqeust):
+    def list(self,request):
         purchase_obj = self.get_queryset()
         serializer = self.get_serializer(purchase_obj,many=True)
         return Response(serializer.data)
@@ -100,6 +100,6 @@ class DepartmentView(GenericViewSet):
             serializer.save()
             return Response(serializer.data,status.HTTP_201_CREATED)
         else:
-            return Response(serializer.error,status.HTTP_400_BAD_REQUEST)
+            return Response(serializer.errors,status.HTTP_400_BAD_REQUEST)
 
 
