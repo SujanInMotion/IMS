@@ -16,17 +16,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from app.views import productTypeView,ProductView,PurchaseView,DepartmentView,SellView,VendorView
+from app.views import productTypeView,ProductView,PurchaseView,DepartmentView,SellView,VendorView,register_view,login_view,group_view
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),    
+    path('register/',register_view.as_view({'post':'create'})),
+    path('login/',login_view.as_view({'post':'create'})),
     path('product-type/', ProductView.as_view({'get':'list','post':'create'})),
     path('product-type/<int:pk>/', ProductView.as_view({'get':'retrieve','put':'update','patch':'partial_update', 'delete':'destroy'})),
     path('product/', ProductView.as_view({'get':'list','post':'create'})),
+    path('product/<int:pk>/', ProductView.as_view({'get':'retrieve','put':'update','delete':'destroy'})),
     path('vendor/', VendorView.as_view({'get':'list','post':'create'})),
     path('purchase/', PurchaseView.as_view({'get':'list','post':'create'})),
     path('department/', DepartmentView.as_view({'get':'list','post':'create'})),
     path('sell/', SellView.as_view({'get':'list','post':'create'})),
-   
+    path('group/',group_view.as_view({'get':'list'}))
     
 ]

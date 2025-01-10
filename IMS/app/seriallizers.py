@@ -1,5 +1,8 @@
 from rest_framework import serializers
 from .models import ProductType,Product,Purchase,Vendor,Sell,Department
+from django.contrib.auth.models import User
+from django.contrib.auth.models import Group
+from django.db import models
 
 class ProductTypeSerializer(serializers.ModelSerializer):
     class Meta:
@@ -34,5 +37,34 @@ class DepartmentSerializer(serializers.ModelSerializer):
         model = Department
         fields = '__all__'
         
+class UserSerializer(serializers.ModelSerializer):
+    #group = serializers.PrimaryKeyRelatedField(queryset=Group.objects.all(), required=False)
+    class Meta:
+        model = User
+        # fields = ['username','password']
+        fields = ['username','password','groups']
+        
+        
+        extra_kwargs = {
+            'password':{
+                'write_only':True
+            }
+        }
+        
+class UserSerializer(serializers.ModelSerializer):
+   
 
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'groups']
+
+        
+        
+class GroupSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Group
+        fields = ['id','name']
+        
+        
+    
         
